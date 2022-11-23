@@ -3,9 +3,6 @@ using System.Reflection;
 using Search;
 using Search.Interfaces;
 using Moq;
-using Search.Services;
-using System.IO;
-using System.Collections;
 
 namespace nUnitTest
 {
@@ -19,10 +16,7 @@ namespace nUnitTest
         readonly object[] parameters = { Utils.DIRECTORY };
 
         [OneTimeSetUp]
-        public void Setup()
-        {
-            _application = new Application(_directoryServiceMock.Object, _fileServiceMock.Object, _topServiceMock.Object);
-        }
+        public void Setup() => _application = new Application(_directoryServiceMock.Object, _fileServiceMock.Object, _topServiceMock.Object);
 
         [Test]
         public void ReadDirectoryTest1()
