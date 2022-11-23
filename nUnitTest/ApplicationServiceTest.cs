@@ -1,17 +1,18 @@
-﻿using nUnitTest.Interfaces;
-using System.Reflection;
+﻿using Moq;
 using Search;
 using Search.Interfaces;
-using Moq;
 
 namespace nUnitTest
 {
+    /// <summary>
+    /// AplicationServiceTest
+    /// </summary>
     public class ApplicationServiceTest
     { 
         private Application _application;
-        private Mock<IDirectoryService> _directoryServiceMock = new();
-        private Mock<IFileService> _fileServiceMock = new();
-        private Mock<ITopService> _topServiceMock = new();
+        private readonly Mock<IDirectoryService> _directoryServiceMock = new();
+        private readonly Mock<IFileService> _fileServiceMock = new();
+        private readonly Mock<ITopService> _topServiceMock = new();
 
         readonly object[] parameters = { Utils.DIRECTORY };
 
@@ -26,15 +27,18 @@ namespace nUnitTest
                 .Returns(new List<string>
                     { Utils.FILENAME1, Utils.FILENAME2 });
 
-            IEnumerable<string> result = (IEnumerable<string>)Invoke(_application, "ReadDirectory", parameters);
-            Assert.That(result, Is.Not.Null); 
-            Assert.That(result.Count(), Is.EqualTo(2));
+            IEnumerable<string>? result = Invoke(_application, Utils.READ_DIRECTORY_METHOD, parameters) as IEnumerable<string>;
+            Assert.Multiple(() =>
+            {
+                Assert.That(result, Is.Not.Null);
+                Assert.That(result.Count(), Is.EqualTo(2));
+            });
         }
 
-        private static Object? Invoke(object o, string methodName, params object[] args)
+        private static Object? Invoke(object obj, string methodName, params object[] args)
         {
-            var method = o.GetType().GetMethod(methodName, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
-            return method?.Invoke(o, args);
+            var method = obj.GetType().GetMethod(methodName, System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            return method?.Invoke(obj, args);
         }
     }
 }

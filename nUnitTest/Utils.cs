@@ -18,5 +18,7 @@
         public static readonly string[] CONTENT1 = { "This is the content into a file.", "These sentences are used in a test.", "'is' word appears twice in this file" };
         public static readonly string[] CONTENT2 = { "Hello, world!" };
         public const string WORD = "is";
+
+        public const string READ_DIRECTORY_METHOD = "ReadDirectory";
     }
 }
