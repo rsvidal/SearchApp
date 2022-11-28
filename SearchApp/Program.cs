@@ -4,6 +4,8 @@ using Microsoft.Extensions.DependencyInjection;
 using Search;
 using Search.Interfaces;
 using Search.Services;
+using SearchApp.Interfaces;
+using SearchApp.Services;
 
 if (args.Count() != 1)
 {
@@ -18,6 +20,7 @@ var builder = new ServiceCollection()
     .AddSingleton<IFileService, FileService>()
     .AddSingleton<ITopService, TopService>()
     .AddSingleton<ICacheService, CacheService>()
+    .AddSingleton<ICountService, CountService>()
     .BuildServiceProvider();
 
 Application console = builder.GetRequiredService<Application>();

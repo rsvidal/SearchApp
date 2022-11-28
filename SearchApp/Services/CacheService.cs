@@ -16,8 +16,15 @@ namespace Search.Services
         /// </summary>
         /// <param name="fileName"></param>
         /// <param name="fileDate"></param>
-        /// <returns>TRUE if file is cached, FALSE otherwise</returns>
-        public bool IsCached(string fileName, DateTime fileDate) => files.ContainsKey(fileName) && files[fileName]?.LastDate >= fileDate;
+        /// <returns>TRUE if file is cached, FALSE otherwise</returns>        
+        public bool IsCached(string fileName, DateTime fileDate) => files.ContainsKey(fileName) && (files[fileName]?.LastDate ?? DateTime.MinValue) >= fileDate;
+
+        /// <summary>
+        /// Get
+        /// </summary>
+        /// <param name="fileName"></param>
+        /// <returns></returns>
+        public String[] Get(string fileName) => files.GetValueOrDefault(fileName)?.Words ?? Array.Empty<string>();
 
         /// <summary>
         /// Set. Add or update file in cache
@@ -39,18 +46,6 @@ namespace Search.Services
 
             if (fileContent.LastDate.CompareTo(fileDate) < 0)
                 fileContent.Set(fileDate, words);
-        }
-
-        /// <summary>
-        /// Count 
-        /// </summary>
-        /// <param name="fileName"></param>
-        /// <param name="word"></param>
-        /// <returns></returns>
-        public int Count(string fileName, string word)
-        {
-            string[]? words = files.GetValueOrDefault(fileName)?.Words;
-            return words != null ? words.Where(e => e == word).ToList().Count : 0;
         }
 
         /// <summary>

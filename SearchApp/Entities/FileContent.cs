@@ -1,10 +1,10 @@
 ﻿namespace Search.Entities
 {
     public class FileContent
-    {
-        public DateTime LastDate  { get; set; }
+    {        
+        public DateTime LastDate  { get; private set; }
 
-        public string[] Words { get; set; }
+        public string[] Words { get; private set; }
 
         /// <summary>
         /// Constructor

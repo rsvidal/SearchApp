@@ -3,6 +3,7 @@ using Moq;
 using Search.Entities;
 using Search.Interfaces;
 using Search.Services;
+using SearchApp.Interfaces;
 
 namespace nUnitTest
 {
@@ -13,12 +14,13 @@ namespace nUnitTest
     {
         private IFileService _fileService;
         private readonly Mock<ICacheService> _cacheServiceMock = new();
+        private readonly Mock<ICountService> _countServiceMock = new();
 
         [OneTimeSetUp]        
         override public void Setup()
         {
-            base.Setup();            
-            _fileService = new FileService(_cacheServiceMock.Object);
+            base.Setup(); 
+            _fileService = new FileService(_cacheServiceMock.Object, _countServiceMock.Object);
         }
 
         [Test]
@@ -47,7 +49,7 @@ namespace nUnitTest
         {
             // cacheServiceMock            
             _cacheServiceMock.Setup(m => m.IsCached(It.IsAny<string>(), It.IsAny<DateTime>())).Returns(false);
-            _cacheServiceMock.Setup(m => m.Count(It.IsAny<string>(), It.IsAny<string>())).Returns(2);
+            _countServiceMock.Setup(m => m.Count(It.IsAny<string[]>(), It.IsAny<string>())).Returns(2);
 
             var counter = await _fileService.GetCountAsync(Utils.FILENAME1, Utils.WORD);
             AssertCounter(counter, Utils.FILENAME1, 2);

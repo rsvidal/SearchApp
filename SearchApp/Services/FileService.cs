@@ -1,17 +1,20 @@
 ﻿using Search.Interfaces;
 using Search.Entities;
+using SearchApp.Interfaces;
 
 namespace Search.Services
 {
     public class FileService : IFileService
     {
         private readonly ICacheService _cacheService;
+        private readonly ICountService _countService;
 
         /// <summary>
         /// Constructor
         /// </summary>
-        /// <param name="cacheService"></param>
-        public FileService(ICacheService cacheService) => _cacheService = cacheService;
+        /// <param name="cacheService"></param> 
+        /// <param name="countService"></param>
+        public FileService(ICacheService cacheService, ICountService countService) => (_cacheService, _countService) = (cacheService ?? throw new ArgumentNullException(nameof(cacheService)), countService ?? throw new ArgumentNullException(nameof(countService)));
 
         /// <summary>
         /// GetName (and extension file)
@@ -44,7 +47,7 @@ namespace Search.Services
                 _cacheService.Set(fileName, lastWriteTime, content);                
             }
 
-            counter.Count = _cacheService.Count(fileName, word);            
+            counter.Count = _countService.Count(_cacheService.Get(fileName), word);            
             // DEBUG Console.WriteLine($"{fileName} file. Task finished!");
             return counter;
         }

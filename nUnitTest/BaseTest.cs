@@ -15,7 +15,7 @@ namespace nUnitTest
         [OneTimeSetUp]
         virtual public void Setup()
         {
-            _directoryService = new DirectoryService();            
+            _directoryService = new DirectoryService();
             Directory.CreateDirectory(Utils.DIRECTORY);
             CreateFile(Utils.FILENAME1);
             CreateFile(Utils.FILENAME2);

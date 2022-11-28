@@ -14,8 +14,11 @@ namespace Search
         /// Constructor
         /// </summary>
         /// <param name="directoryService"></param>
-        /// <param name="topService"></param>
-        public Application(IDirectoryService directoryService, IFileService fileService, ITopService topService) => (_directoryService, _fileService, _topService) = (directoryService, fileService, topService);
+        /// <param name="topService"></param>                
+        public Application(IDirectoryService directoryService, IFileService fileService, ITopService topService) => (_directoryService, _fileService, _topService) = 
+            (directoryService ?? throw new ArgumentNullException(nameof(directoryService)), 
+             fileService ?? throw new ArgumentNullException(nameof(fileService)), 
+             topService ?? throw new ArgumentNullException(nameof(topService)));
 
         /// <summary>
         /// Run application

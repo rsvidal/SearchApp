@@ -2,7 +2,7 @@
 {
     public class Counter
     {
-        public string FileName { get; set; }
+        public string FileName { get; private set; }
 
         public int Count { get; set; } = 0;
 

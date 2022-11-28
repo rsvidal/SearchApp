@@ -4,9 +4,9 @@
     {
         bool IsCached(string fileName, DateTime fileDate);
 
-        void Set(string fileName, DateTime fileDate, string content);
+        string[] Get(string fileName);
 
-        int Count(string fileName, string word);
+        void Set(string fileName, DateTime fileDate, string content);
 
         void Clean(IEnumerable<string> filenames);
     }
