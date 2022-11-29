@@ -19,7 +19,7 @@ namespace nUnitTest
         public void Setup() => _topService = new TopService(_fileServiceMock.Object); 
 
         [Test]
-        public async Task Count_Words_In_FileName1_And_FileName2()
+        public async Task Count_Words_In_FileName1_And_FileName2_Returns_FileName1_And_Two_Words()
         {
             // fileServiceMock            
             _fileServiceMock.Setup(m => m.GetCountAsync(Utils.FILENAME1, It.IsAny<string>())).Returns(Task.FromResult(new Counter(Utils.FILENAME1, 2)));
@@ -33,7 +33,7 @@ namespace nUnitTest
         }
 
         [Test]
-        public async Task Count_Words_In_FileName1_And_FileName2_And_Throw_Exception_In_Wrong_FileName()
+        public async Task Count_Words_In_FileName1_And_FileName2_And_Throw_Exception_In_Wrong_FileName_Returns_FileName1_And_Two_Words()
         {
             // fileServiceMock            
             _fileServiceMock.Setup(m => m.GetCountAsync(Utils.FILENAME1, It.IsAny<string>())).Returns(Task.FromResult(new Counter(Utils.FILENAME1, 2)));

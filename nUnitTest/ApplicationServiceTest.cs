@@ -20,7 +20,7 @@ namespace nUnitTest
         public void Setup() => _application = new Application(_directoryServiceMock.Object, _fileServiceMock.Object, _topServiceMock.Object);
 
         [Test]
-        public void Read_Directory_And_Get_Two_Files()
+        public void Read_Directory_Returns_Two_Files()
         {
             // directoryServiceMock            
             _directoryServiceMock.Setup(m => m.GetTxtFiles(It.IsAny<string>())).Returns(new List<string> { Utils.FILENAME1, Utils.FILENAME2 });

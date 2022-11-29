@@ -16,14 +16,14 @@ namespace nUnitTest
         }
 
         [Test]
-        public void Is_Cached_Filename1()
+        public void Is_Cached_Filename1_Returns_True()
         {
             bool isCached = _cacheService.IsCached(Utils.FILENAME1, DateTime.Now.AddHours(-2));
             Assert.That(isCached, Is.True);
         }
 
         [Test]
-        public void Is_Cached_FileName1_But_Is_Not_Cached_Wrong_FileName()
+        public void Is_Cached_FileName1_But_Is_Not_Cached_Wrong_FileName_Returns_False()
         {
             bool isCached1 = _cacheService.IsCached(Utils.FILENAME1, DateTime.Now);
             bool isCached2 = _cacheService.IsCached(Utils.WRONG_FILENAME, DateTime.Now);

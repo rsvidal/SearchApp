@@ -38,14 +38,14 @@ namespace nUnitTest
         }
 
         [Test]
-        public async Task Get_Zero_Words_From_Wrong_Filename()
+        public async Task Get_Words_From_Wrong_Filename_Returns_Zero()
         {
             var counter = await _fileService.GetCountAsync(Utils.WRONG_FILENAME, Utils.WORD);
             AssertCounter(counter, Utils.WRONG_FILENAME, 0);
         }
 
         [Test]
-        public async Task Get_Two_Words_From_FileName1()
+        public async Task Get_Words_From_FileName1_Returns_Two()
         {
             // cacheServiceMock            
             _cacheServiceMock.Setup(m => m.IsCached(It.IsAny<string>(), It.IsAny<DateTime>())).Returns(false);

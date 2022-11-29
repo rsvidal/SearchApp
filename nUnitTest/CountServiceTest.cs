@@ -17,7 +17,7 @@ namespace nUnitTest
         public void Setup() => _countService = new CountService();
 
         [Test]
-        public void Count_Words_In_Array()
+        public void Count_Words_In_Array_Returns_Two()
         {
             int count = _countService.Count(Utils.WORDS, Utils.WORD);
             Assert.That(count, Is.EqualTo(2));
