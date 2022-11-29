@@ -20,12 +20,10 @@ namespace nUnitTest
         public void Setup() => _application = new Application(_directoryServiceMock.Object, _fileServiceMock.Object, _topServiceMock.Object);
 
         [Test]
-        public void ReadDirectoryTest1()
+        public void Read_Directory_And_Get_Two_Files()
         {
             // directoryServiceMock            
-            _directoryServiceMock.Setup(m => m.GetTxtFiles(It.IsAny<string>()))
-                .Returns(new List<string>
-                    { Utils.FILENAME1, Utils.FILENAME2 });
+            _directoryServiceMock.Setup(m => m.GetTxtFiles(It.IsAny<string>())).Returns(new List<string> { Utils.FILENAME1, Utils.FILENAME2 });
 
             IEnumerable<string>? result = Invoke(_application, Utils.READ_DIRECTORY_METHOD, parameters) as IEnumerable<string>;
             Assert.Multiple(() =>

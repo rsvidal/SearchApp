@@ -13,13 +13,13 @@ namespace nUnitTest
     public class TopServiceTest: ISetupTest
     {
         private ITopService _topService;
-        private Mock<IFileService> _fileServiceMock = new();
+        private readonly Mock<IFileService> _fileServiceMock = new();
 
         [OneTimeSetUp]        
         public void Setup() => _topService = new TopService(_fileServiceMock.Object); 
 
         [Test]
-        public async Task GetTopAsyncTest1()
+        public async Task Count_Words_In_FileName1_And_FileName2()
         {
             // fileServiceMock            
             _fileServiceMock.Setup(m => m.GetCountAsync(Utils.FILENAME1, It.IsAny<string>())).Returns(Task.FromResult(new Counter(Utils.FILENAME1, 2)));
@@ -33,7 +33,7 @@ namespace nUnitTest
         }
 
         [Test]
-        public async Task GetTopAsyncTest2()
+        public async Task Count_Words_In_FileName1_And_FileName2_And_Throw_Exception_In_Wrong_FileName()
         {
             // fileServiceMock            
             _fileServiceMock.Setup(m => m.GetCountAsync(Utils.FILENAME1, It.IsAny<string>())).Returns(Task.FromResult(new Counter(Utils.FILENAME1, 2)));

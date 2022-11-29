@@ -24,28 +24,28 @@ namespace nUnitTest
         }
 
         [Test]
-        public void GetNameTest1()
+        public void Get_Name_From_File()
         {
             String fileName = _fileService.GetName(Utils.FILENAME1);
             Assert.That(fileName, Is.EqualTo(Utils.NAME1));
         }
 
         [Test]
-        public void GetNameTest2()
+        public void Get_Name_From_Directory()
         {
             String fileName = _fileService.GetName(Utils.DIRECTORY);
             Assert.IsEmpty(fileName);
         }
 
         [Test]
-        public async Task GetCountAsyncTest1()
+        public async Task Get_Zero_Words_From_Wrong_Filename()
         {
             var counter = await _fileService.GetCountAsync(Utils.WRONG_FILENAME, Utils.WORD);
             AssertCounter(counter, Utils.WRONG_FILENAME, 0);
         }
 
         [Test]
-        public async Task GetCountAsyncTest2()
+        public async Task Get_Two_Words_From_FileName1()
         {
             // cacheServiceMock            
             _cacheServiceMock.Setup(m => m.IsCached(It.IsAny<string>(), It.IsAny<DateTime>())).Returns(false);
